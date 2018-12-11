@@ -1,0 +1,94 @@
+# local env files
+.env.local
+.env.*.local
+
+# frontend
+node_modules
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+test/unit/coverage/
+package-lock.json
+
+# backend
+.DS_Store
+.gradle
+build/
+out/
+gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# cypress output
+cypress
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+appium.log
+
+# Editor directories and files
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+.terraform
+
+*-container.info
+
+# jet e2e
+jet-frontend/test/unit/coverage/
+jet-e2e/allure-report/
+jet-e2e/allure-results/
+jet-e2e/errorShots/
+jet-e2e/screenshots/
+jet-e2e/reporter/
+jet-e2e/Data/UserData.json
+
+# jet serverside perfermance
+jet-serverside-performance/project/project
+jet-serverside-performance/project/target
+jet-serverside-performance/target
+
+#git api testing
+jet-api-postman/reports.html
+
+
+base-ami.info
+
+### SonarQube ###
+.scannerwork
+jet-clientside-performance/reports
+zap-report.html
+infrastructure/app/*.jar
+jet-service/LOG_FILE_IS_UNDEFINED
+veracode/*.zip
+veracode/*.jar
+infrastructure/app/*.py.zip
+jet-serverside-performance/src/test/resources/random-*.jpeg
+jet-frontend/routes.txt
