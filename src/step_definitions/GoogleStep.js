@@ -15,6 +15,6 @@ defineSupportCode(({ Given, When, Then }) => {
     });
 
     Then(/^search result found$/, () => {
-        expect(browser.isVisible('#cnt')).to.be.false;
+        expect(browser.isVisible('#cnt')).to.be.true;
     });
 });

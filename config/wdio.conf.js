@@ -32,19 +32,29 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'firefox'
+        // maxInstances can get overwritten per capability. So if you have an
+        // in-house Selenium grid with only 5 firefox instance available you can
+        // make sure that not more than 5 instance gets started at a time.
+        maxInstances: 1,
+        appiumVersion:'1.7.2',
+        deviceName:'emulator-5554',
+        deviceOrientation:'portrait',
+        autoGrantPermissions: "true",
+        browserName:'Chrome',
+        platformVersion:'8.1',
+        platformName:'Android',
+        chromeOptions: {
+            args: ['--use-fake-ui-for-media-stream=1']
+        },
+        newCommandTimeout: '180000',
+
     }],
     //
     // ===================
@@ -68,7 +78,6 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: 0,
     //
     // Saves a screenshot to a given path if a command fails.
     screenshotPath: './errorLog',
@@ -77,7 +86,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'www.google.com',
+    baseUrl: 'https://www.google.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -111,7 +120,9 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    services: ['appium'],
+    port:4723,
+    host:'127.0.0.1',
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -123,24 +134,51 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/reporters/dot.html
-    // reporters: ['dot'],//
+    // reporters: ['dot'],./src/step_definitions/*.js//
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
-        require: ['./src/step_definitions/*.js'],        // <string[]> (file/dir) require files before executing features
-        backtrace: false,   // <boolean> show full backtrace for errors
-        compiler: [],       // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
-        dryRun: false,      // <boolean> invoke formatters without executing steps
-        failFast: false,    // <boolean> abort the run on first failure
-        format: ['pretty'], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
-        colors: true,       // <boolean> disable colors in formatter output
-        snippets: true,     // <boolean> hide step definition snippets for pending steps
-        source: true,       // <boolean> hide source uris
-        profile: [],        // <string[]> (name) specify the profile to use
-        strict: false,      // <boolean> fail if there are any undefined or pending steps
-        tags: [],           // <string[]> (expression) only execute the features or scenarios with tags matching the expression
-        timeout: 20000,     // <number> timeout for step definitions
-        ignoreUndefinedDefinitions: false, // <boolean> Enable this config to treat undefined definitions as warnings.
+        // <boolean> show full backtrace for errors
+        backtrace: false,
+        // <string[]> filetype:compiler used for processing required features
+        compiler: [
+            'js:babel-register',
+        ],
+        // <boolean< Treat ambiguous definitions as errors
+        failAmbiguousDefinitions: true,
+        // <boolean> invoke formatters without executing steps
+        // dryRun: false,
+        // <boolean> abort the run on first failure
+        failFast: false,
+        // <boolean> Enable this config to treat undefined definitions as
+        // warnings
+        ignoreUndefinedDefinitions: false,
+        // <string[]> ("extension:module") require files with the given
+        // EXTENSION after requiring MODULE (repeatable)
+        name: [],
+        // <boolean> hide step definition snippets for pending steps
+        snippets: true,
+        // <boolean> hide source uris
+        source: true,
+        // <string[]> (name) specify the profile to use
+        profile: [],
+        // <string[]> (file/dir) require files before executing features
+        require: [
+            './src/step_definitions/GoogleStep.js'
+        ],
+        // <string> specify a custom snippet syntax
+        snippetSyntax: undefined,
+        // <boolean> fail if there are any undefined or pending steps
+        strict: true,
+        // <string> (expression) only execute the features or scenarios with
+        // tags matching the expression, see
+        // https://docs.cucumber.io/tag-expressions/
+        tagExpression: 'not @Pending',
+        // <boolean> add cucumber tags to feature or scenario name
+        tagsInTitle: false,
+        // <number> timeout for step definitions
+        timeout: 10*60*1000,
     },
+
     
     //
     // =====
@@ -253,4 +291,24 @@ exports.config = {
      */
     // onComplete: function(exitCode, config, capabilities) {
     // }
+
+    before: function before() {
+        /**
+         * Setup the Chai assertion framework
+         */
+        const chai = require('chai');
+
+        global.expect = chai.expect;
+        global.assert = chai.assert;
+        global.should = chai.should();
+    },
+
+    reporters: ['allure','spec'],
+    reporterOptions: {
+        allure: {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: true,
+            useCucumberStepReporter: true
+        }
+    }
 }

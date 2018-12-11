@@ -1,8 +1,4 @@
 {
-  "name": "JET_E2E",
-  "version": "0.0.1",
-  "description": "Running e2e test for BAY- KS Auto",
-  "homepage": "https://jet.qa.buk0.com",
   "scripts": {
     "test": "yarn run test:validate && yarn run test:features",
     "test:features": "wdio ./config/wdio.conf.js; wdio_ret=$?; exit $wdio_ret",
