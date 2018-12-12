@@ -1,14 +1,6 @@
 {
   "scripts": {
     "test": "yarn run test:validate && yarn run test:features",
-    "test:features": "wdio ./config/wdio.conf.js; wdio_ret=$?; exit $wdio_ret",
-    "test:zap": "wdio ./config/wdio.zap.conf.js --spec ./src/features/SmokeTestLocalBrowser.feature; wdio_ret=$?; exit $wdio_ret",
-    "test:android-features": "wdio ./config/wdio.android.conf.js --spec ./src/features/SmokeTest.feature; wdio_ret=$?; exit $wdio_ret",
-    "test:android-cct": "wdio ./config/wdio.localCCT.conf.js --spec ./src/features/HomeCCT.feature; wdio_ret=$?; exit $wdio_ret",
-    "test:regression": "wdio ./config/wdio.android.conf.js --suite regression; wdio_ret=$?; exit $wdio_ret",
-    "test:parallel-features": "wdio ./config/wdio.parallel.conf.js; wdio_ret=$?; exit $wdio_ret",
-    "test:ios-features": "wdio ./config/wdio.ios.conf.js; wdio_ret=$?; exit $wdio_ret",
-    "test:validate": "eslint 'src/**/*.js' 'test/**/*.js!(setup.js)'",
     "allure:gen-report": "./node_modules/allure-commandline/bin/allure generate allure-results --clean",
     "allure:open-report": "./node_modules/allure-commandline/bin/allure open"
   },
@@ -28,6 +20,7 @@
     "babel-preset-es2015": "~6.24.0",
     "babel-register": "~6.26.0",
     "chai": "~4.1.2",
+    "wdio-cucumber-framework": "^2.2.7",
     "wdio-allure-reporter": "^0.6.0",
     "wdio-sauce-service": "^0.4.10",
     "wdio-selenium-standalone-service": "~0.0.9",
@@ -39,9 +32,9 @@
   },
   "devDependencies": {
     "babel-polyfill": "~6.26.0",
+    "es-check": "^5.0.0",
     "eslint": "~4.11.0",
     "eslint-config-airbnb-base": "~12.1.0",
-    "eslint-plugin-import": "~2.8.0",
-    "wdio-cucumber-framework": "^2.2.8"
+    "eslint-plugin-import": "~2.8.0"
   }
 }

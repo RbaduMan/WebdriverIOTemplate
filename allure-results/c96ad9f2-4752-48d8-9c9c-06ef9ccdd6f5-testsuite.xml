@@ -1,0 +1,53 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1544615484166' stop='1544615485873'>
+    <name>Google homepage</name>
+    <title>Google homepage</title>
+    <test-cases>
+        <test-case start='1544615484215' status='broken' stop='1544615485872'>
+            <name>I play google</name>
+            <title>I play google</title>
+            <labels>
+                <label name='feature' value='Google homepage'/>
+                <label name='language' value='javascript'/>
+                <label name='framework' value='wdio'/>
+            </labels>
+            <parameters>
+                <parameter kind='argument' name='browser' value='Chrome'/>
+            </parameters>
+            <steps>
+                <step start='1544615484219' status='passed' stop='1544615485398'>
+                    <name>I navigate to google</name>
+                    <title>I navigate to google</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start='1544615485398' status='passed' stop='1544615485868'>
+                    <name>I type "hello"</name>
+                    <title>I type "hello"</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start='1544615485868' status='broken' stop='1544615485871'>
+                    <name>I press enter</name>
+                    <title>I press enter</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start='1544615485871' status='pending' stop='1544615485872'>
+                    <name>search result found</name>
+                    <title>search result found</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <failure>
+                <message>Cannot read property 'clickSearchButton' of undefined</message>
+                <stack-trace>TypeError: Cannot read property 'clickSearchButton' of undefined
+                    at World.&lt;anonymous> (/Users/pongpipatkawlerk/Project/template/WebdriverIOTemplate/src/step_definitions/GoogleStep.js:17:18)
+                    at new Promise (&lt;anonymous>)
+                    at new F (/Users/pongpipatkawlerk/Project/template/WebdriverIOTemplate/node_modules/core-js/library/modules/_export.js:35:28)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
