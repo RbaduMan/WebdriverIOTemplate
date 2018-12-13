@@ -1,4 +1,5 @@
 import { defineSupportCode } from 'cucumber';
+import TestPage from '../pages/TestPage';
 
 defineSupportCode(({ Given, When, Then }) => {
     Given(/^I navigate to google$/, { wrapperOptions: { retry: 2 } }, () => {
@@ -11,7 +12,7 @@ defineSupportCode(({ Given, When, Then }) => {
     });
 
     When(/^I press enter$/, () => {
-        browser.click('#main > div > form > div > div > div > button');
+        TestPage.clickSearchButton();
     });
 
     Then(/^search result found$/, () => {
